@@ -6,9 +6,9 @@ Creation du dossier :
 
 >`` symfony new --webapp gaelleKerforne `` 
 
-j'ai oublier le --full du coup il ne ma pas installer le webpack
+J'ai oublié le --full du coup il ne m'a pas installer le webpack(pour le front)
 
-j'ai du les installer comme ce qui suit : 
+J'ai du les installer comme ce qui suit : 
 
 >`` composer require symfony/webpack-encore-bundle ``
 
@@ -28,8 +28,9 @@ et je compile avec
 
 >``yarn encore dev``
 
+***************************************************************
 
-###Création de la premiere page :
+###Création de la premiere page HOME :
 
 >  ``symfony console make:controller``
 
@@ -61,7 +62,39 @@ Exemple:
       } 
   }
   ```
+***************************************************************
 
+### Création de l'espace Membres
+
+https://symfony.com/doc/current/security.html
+
+####Phase 1 : création de l'entité User()
+``symfony console make:user``
+
+```php
+
+The name of the security user class (e.g. User) [User]:
+ > User
+
+ Do you want to store user data in the database (via Doctrine)? (yes/no) [yes]:
+ > yes
+
+ Enter a property name that will be the unique "display" name for the user (e.g. email, username, uuid) [email]:
+ > email
+
+ Will this app need to hash/check user passwords? Choose No if passwords are not needed or will be checked/hashed by some other system (e.g. a single sign-on server).
+
+ Does this app need to hash/check user passwords? (yes/no) [yes]:
+ > yes
+
+ created: src/Entity/User.php
+ created: src/Repository/UserRepository.php
+ updated: src/Entity/User.php
+ updated: config/packages/security.yaml
+```
+
+####Phase 2 : création du formulaire d'inscription
+####Phase 3 : création du formulaire de connexion
 
 
 
