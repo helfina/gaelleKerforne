@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\ResgiterType;
+use App\Form\RegisterType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,7 +17,7 @@ class RegisterController extends AbstractController
     public function index(Request $request, EntityManagerInterface $manager, UserPasswordHasherInterface $passwordHashes): Response
     {
         $user = new User();
-        $form = $this->createForm(ResgiterType::class, $user);
+        $form = $this->createForm(RegisterType::class, $user);
         // ecoute la requete
 
         $form->handleRequest($request);
