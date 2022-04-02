@@ -26,17 +26,17 @@ J'ai du les installer comme ce qui suit :
 ```
 et je compile avec 
 
->``yarn encore dev``
+>`yarn encore dev`
 
 ***************************************************************
 
 ###Création de la premiere page HOME :
 
->  ``symfony console make:controller``
+>  `symfony console make:controller`
 
 - Le terminal demande:
 
->`` Choose a name for your controller class (e.g. VictoriousPizzaController): ``
+>` Choose a name for your controller class (e.g. VictoriousPizzaController): `
 
 >``HomeController``
 
@@ -96,27 +96,31 @@ The name of the security user class (e.g. User) [User]:
 
 modifier ici :
 
-``DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=5.7&charset=utf8mb4"``
+`DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=5.7&charset=utf8mb4"`
 
 puis faire : 
 
-``symfony console  doctrine:database:create``
+`symfony console  doctrine:database:create`
 
 pour migrer sa table :
 
->``symfony console make:migration``
+>`symfony console make:migration`
 
->``symfony console doctrine:migrations:migrate``
+>`symfony console doctrine:migrations:migrate`
 
 
 ####Phase 2 : création du formulaire d'inscription
   - creation du controlleur d'inscription :
 
->  ``symfony console make:controller``
-> ``RegisterController``
+>  `symfony console make:controller`
+> `RegisterController`
 
   - creation du formulaire 
->``symfony console make:form``
+> docs : 
+> https://symfony.com/doc/current/reference/forms/types.html#field-groups
+
+
+>`symfony console make:form`
 
  ```php
 The name of the form class (e.g. DeliciousGnomeType):
@@ -141,6 +145,43 @@ twig:
   form_themes: ['bootstrap_5_layout.html.twig']
 ```
 
+Ajout de champs dans la table user (entity)
+
+`symfony console make:entity`
+
+il demande si vous souhaiter mettre a jour ou creer une nouvelle entity :
+
+> `Class name of the entity to create or update (e.g. DeliciousElephant):`
+> `User`
+
+il demande le nom ~~du nouveau champs a ajouter~~ (la nouvelle proprieter) : 
+
+> `New property name (press <return> to stop adding fields):
+> firstname
+>  Field type (enter ? to see all types) [string]:
+> 
+> Field length [255]:
+>
+`
+il demande si le champ peut etre null : 
+
+>` Can this field be null in the database (nullable) (yes/no) [no]:
+> no
+`
+
+il demande si l'on veut en ajouter d'autre ou ou pas 
+
+`Add another property? Enter the property name (or press <return> to stop adding fields):
+`
+
+Ensuite faire la migration : 
+
+> `symfony console make:migration` 
+> `symfony console doctrine:migrations:migrate`
+
+>###Docs: 
+>Contrainte de validation du formulaire
+> https://symfony.com/doc/current/reference/forms/types/form.html#constraints
 
 ####Phase 3 : création du formulaire de connexion
 
