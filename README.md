@@ -184,34 +184,8 @@ Ensuite faire la migration :
 > https://symfony.com/doc/current/reference/forms/types/form.html#constraints
 
 ####Phase 3 : création du formulaire de connexion
-on cree un guard authentification
-> `symfony console make:auth`
 
-quel style d'authetification vous vouler :
-0 un authenticator vide
-1 un formulaire de connexion
-```console 
-What style of authentication do you want? [Empty authenticator]:
-[0] Empty authenticator
-[1] Login form authenticator`
->1
-```
 
-il va cree une class qui permettra de verifier toute les correspondance pour ce connecter
-
-```
-The class name of the authenticator to create (e.g. AppCustomAuthenticator):
->LoginFormAuthenticator
-Choose a name for the controller class (e.g. SecurityController) [SecurityController]:
- >
-
-```
-esceque on veut une route de deconnexion
-
-```
-Do you want to generate a '/logout' URL? (yes/no) [yes]:
->yes
-```
 
 
 
