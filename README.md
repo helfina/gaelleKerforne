@@ -92,8 +92,28 @@ The name of the security user class (e.g. User) [User]:
  updated: src/Entity/User.php
  updated: config/packages/security.yaml
 ```
+  - creer la database avec doctrine : 
 
+modifier ici :
+
+``DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=5.7&charset=utf8mb4"``
+
+puis faire : 
+
+``symfony console  doctrine:database:create``
+
+pour migrer sa table :
+
+``symfony console make:migration``
+
+
+``symfony console doctrine:migrations:migrate
+``
 ####Phase 2 : création du formulaire d'inscription
+>  ``symfony console make:controller``
+> ``RegisterController``
+
+
 ####Phase 3 : création du formulaire de connexion
 
 
