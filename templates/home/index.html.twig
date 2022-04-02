@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block content %}
+{% block body %}
     <!-- ======= Header ======= -->
     <header id="header">
         <div class="container">
@@ -717,7 +717,11 @@
     </section><!-- End Contact Section -->
 
 <footer>
-    <a href=""></a>
+    {% if app.user %}
+        <a href="{{ path('app_account') }}">Mon compte <small>({{ app.user.firstname }})</small></a> | <a href="{{ path('app_logout') }}">Déconnexion</a>
+    {% else %}
+        <a href="{{ path('app_login') }}">Connexion</a> | <a href="{{ path('app_register') }}">Inscription</a>
+    {% endif %}
 
     <div class="credits">
         <!-- All the links in the footer should remain intact. -->

@@ -104,15 +104,30 @@ puis faire :
 
 pour migrer sa table :
 
-``symfony console make:migration``
+>``symfony console make:migration``
+
+>``symfony console doctrine:migrations:migrate``
 
 
-``symfony console doctrine:migrations:migrate
-``
 ####Phase 2 : création du formulaire d'inscription
+  - creation du controlleur d'inscription :
+
 >  ``symfony console make:controller``
 > ``RegisterController``
 
+  - creation du formulaire 
+>``symfony console make:form``
+
+ ```php
+The name of the form class (e.g. DeliciousGnomeType):
+ > Resgiter
+``` 
+avec quelle entite tu veux faire le liens :
+
+```php 
+ The name of Entity or fully qualified model class name that the new form will be bound to (empty for none):
+ > User
+```
 
 ####Phase 3 : création du formulaire de connexion
 
