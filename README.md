@@ -128,6 +128,19 @@ avec quelle entite tu veux faire le liens :
  The name of Entity or fully qualified model class name that the new form will be bound to (empty for none):
  > User
 ```
+Mise en place du theme pour les formulaires :
+
+https://symfony.com/doc/current/form/bootstrap5.html
+
+> config/packages/twig.yaml
+
+ajouter:
+
+```yaml
+twig:
+  form_themes: ['bootstrap_5_layout.html.twig']
+```
+
 
 ####Phase 3 : création du formulaire de connexion
 
