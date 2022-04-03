@@ -231,7 +231,7 @@ gestions de l'espace membre :
 decommenter la ligne  dans le fichier config/packages/security.yaml:
 
 ``  # - { path: ^/compte, roles: ROLE_USER }``
-
+on lui dit que toutes les route qui contienne le /compte doit etre connecter avec le role User
 ```yaml
 access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
@@ -351,8 +351,50 @@ class SecurityController extends AbstractController
 
 ```
 
+nous allons compartimenter l'espace membres au reste du site
 
+symfony console make:controller
+AccountPasswordController
 
+on supprime le template account_password
+dans template/account on crre un fichier :  password.html.twig
+
+dans AccountPasswordController on modifie le chemin :
+```php 
+class AccountPasswordController extends AbstractController
+{
+    #[Route('/account/password', name: 'app_account_password')]
+    public function index(): Response
+    {
+        return $this->render('account_password/index.html.twig', [
+            'controller_name' => 'AccountPasswordController',
+        ]);
+    }
+}
+```
+
+```php 
+class AccountPasswordController extends AbstractController
+{
+    #[Route('/compte/password', name: 'app_account_password')]
+    public function index(): Response
+    {
+        return $this->render('account/password.html.twig');
+    }
+}
+```
+creation du formulaire pour le changement du mot de pass:
+
+`symfony console make:form`
+
+```txt
+
+>The name of the form class (e.g. TinyChefType):
+> ChangePassword
+
+>The name of Entity or fully qualified model class name that the new form will be bound to (empty for none):
+> User
+```
 
 
 
