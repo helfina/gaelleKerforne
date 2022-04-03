@@ -1,5 +1,8 @@
 # Ma Web App perso - Portfolio
 
+###SOMMAIRE
+[Création d'une entité](#Création d'une entité)
+
   ## Etape du projet
 
 Creation du dossier : 
@@ -147,7 +150,7 @@ ajouter:
 twig:
   form_themes: ['bootstrap_5_layout.html.twig']
 ```
-
+##Création d'une entité
 Ajout de champs dans la table user (entity)
 
 >`symfony console make:entity`
@@ -396,11 +399,61 @@ creation du formulaire pour le changement du mot de pass:
 > User
 ```
 
+Creation de l'espace Admin avec easyAdmin
 
+installation :
 
+>https://symfony.com/bundles/EasyAdminBundle/current/index.html
 
+``composer require easycorp/easyadmin-bundle``
+`symfony console make:admin:dashboard`
 
+```text
+Which class name do you prefer for your Dashboard controller? [DashboardController]:
+ >
 
+```
+il demande a quelle endroit je souhaite generer ce controller :
+
+```text
+In which directory of your project do you want to generate "DashboardController"? [src/Controller/Admin/]:
+>
+```
+dans dashboardController decommenter pour creer le menu
+```php
+public function configureMenuItems(): iterable
+    {
+        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
+    }
+```
+
+```php
+public function configureMenuItems(): iterable
+    {
+        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+         yield MenuItem::linkToCrud('Utilisateur', 'fas fa-list', UserClass::class);
+    }
+```
+le ligne : ``yield MenuItem::linkToCrud('Utilisateur', 'fas fa-list', UserClass::class);``
+sert a ajout un lien dans le menu
+
+ensuite faire `symfony console make:admin:crud` 
+pour creer les entiter a manager(des controller pour une entite a manager)
+
+```txt
+Which Doctrine entity are you going to manage with this CRUD controller?:
+  [0] App\Entity\User                                                     
+ >    0
+  Which directory do you want to generate the CRUD controller in? [src/Controller/Admin/]:
+ >  
+ Namespace of the generated CRUD controller [App\Controller\Admin]:
+ >
+
+```
+> [Doc de symfony pour EasyAdmin](https://symfony.com/bundles/EasyAdminBundle/current/crud.html)
+
+> [modification du Dashboard EasyAdmin 4](https://www.youtube.com/watch?v=ze6XJTACo1s) 
 
 
 
@@ -446,3 +499,8 @@ Pour pouvoir recuperate le dossier en local
 - dans la console tape :
 >`` git clone <lien du repository>``
 >``composer install``
+
+
+
+###RESSOURCES DES MODULE A IMPLEMENTER
+> [Full Calendar](https://nouvelle-techno.fr/articles/live-coding-utilisation-de-fullcalendar)
