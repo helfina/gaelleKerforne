@@ -225,14 +225,131 @@ Création de l'espace membre :
 
 >`` Choose a name for your controller class (e.g. FierceGnomeController):
   > AccountController``
->
 
+gestions de l'espace membre : 
 
+decommenter la ligne  dans le fichier config/packages/security.yaml:
 
+``  # - { path: ^/compte, roles: ROLE_USER }``
 
+```yaml
+access_control:
+        # - { path: ^/admin, roles: ROLE_ADMIN }
+         - { path: ^/compte, roles: ROLE_USER }
+```
 
+et créér la redirection a l'espace membre  dans security/LoginFormAuthenticator: 
 
+```php
+ public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
+    {
+        if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
+            return new RedirectResponse($targetPath);
+        }
 
+        // For example:
+        //return new RedirectResponse($this->urlGenerator->generate('some_route'));
+        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+    }
+```
+decommenter la ligne returne et metter la route de votre page:
+
+```php
+ public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
+    {
+        if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
+            return new RedirectResponse($targetPath);
+        }
+        return new RedirectResponse($this->urlGenerator->generate('app_account'));
+        //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+    }
+```
+
+pour obtenir la liste des route  faite : 
+
+>``symfony console debug:router ``
+
+```txt 
+ -------------------------- -------- -------- ------ ----------------------------------- 
+  Name                       Method   Scheme   Host   Path                               
+ -------------------------- -------- -------- ------ ----------------------------------- 
+  _preview_error             ANY      ANY      ANY    /_error/{code}.{_format}           
+  _wdt                       ANY      ANY      ANY    /_wdt/{token}                      
+  _profiler_home             ANY      ANY      ANY    /_profiler/                        
+  _profiler_search           ANY      ANY      ANY    /_profiler/search                  
+  _profiler_search_bar       ANY      ANY      ANY    /_profiler/search_bar              
+  _profiler_phpinfo          ANY      ANY      ANY    /_profiler/phpinfo                 
+  _profiler_search_results   ANY      ANY      ANY    /_profiler/{token}/search/results  
+  _profiler_open_file        ANY      ANY      ANY    /_profiler/open                    
+  _profiler                  ANY      ANY      ANY    /_profiler/{token}
+  _profiler_router           ANY      ANY      ANY    /_profiler/{token}/router
+  _profiler_exception        ANY      ANY      ANY    /_profiler/{token}/exception
+  _profiler_exception_css    ANY      ANY      ANY    /_profiler/{token}/exception.css
+  app_account                ANY      ANY      ANY    /compte
+  app_home                   ANY      ANY      ANY    /
+  app_register               ANY      ANY      ANY    /inscription
+  app_login                  ANY      ANY      ANY    /login
+  app_logout                 ANY      ANY      ANY    /logout
+ -------------------------- -------- -------- ------ -----------------------------------
+```
+
+ajout d'une redirection a son compte si l'utilisateur est connecter :
+
+```php 
+class SecurityController extends AbstractController
+{
+    #[Route(path: '/login', name: 'app_login')]
+    public function login(AuthenticationUtils $authenticationUtils): Response
+    {
+    //     if ($this->getUser()) {
+    //         return $this->redirectToRoute('target_path');
+    //     }
+
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+    }
+
+    #[Route(path: '/logout', name: 'app_logout')]
+    public function logout(): void
+    {
+        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+    }
+}
+
+```
+
+decommenter le if :
+
+```php 
+class SecurityController extends AbstractController
+{
+    #[Route(path: '/login', name: 'app_login')]
+    public function login(AuthenticationUtils $authenticationUtils): Response
+    {
+         if ($this->getUser()) {
+             return $this->redirectToRoute('target_path');
+         }
+
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+    }
+
+    #[Route(path: '/logout', name: 'app_logout')]
+    public function logout(): void
+    {
+        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+    }
+}
+
+```
 
 
 
