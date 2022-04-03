@@ -4,26 +4,27 @@
 
 Creation du dossier : 
 
->`` symfony new --webapp gaelleKerforne `` 
+>`symfony new --webapp gaelleKerforne`
 
 J'ai oublié le --full du coup il ne m'a pas installer le webpack(pour le front)
 
 J'ai du les installer comme ce qui suit : 
 
->`` composer require symfony/webpack-encore-bundle ``
+>`composer require symfony/webpack-encore-bundle `
 
  puis : 
 
-```txt
-    yarn install
-    yarn add node-sass
-    yarn add sass-loader
-    yarn add @fortawesome/fontawesome-free
-    yarn add bootstrap@4.6
-    yarn add jquery
-    yarn add popper.js
-    yarn add file-loader
-```
+>```txt
+>    yarn install
+>    yarn add node-sass
+>    yarn add sass-loader
+>    yarn add @fortawesome/fontawesome-free
+>    yarn add bootstrap@4.6
+>    yarn add jquery
+>    yarn add popper.js
+>    yarn add file-loader
+>```
+>
 et je compile avec 
 
 >`yarn encore dev`
@@ -32,13 +33,13 @@ et je compile avec
 
 ###Création de la premiere page HOME :
 
->  `symfony console make:controller`
+> `symfony console make:controller`
 
 - Le terminal demande:
 
 >` Choose a name for your controller class (e.g. VictoriousPizzaController): `
 
->``HomeController``
+>`HomeController`
 
   - Une fois le controller crée pour que cela devienne la page principale dans le HomeController remplacer la
   route 
@@ -66,12 +67,12 @@ Exemple:
 
 ### Création de l'espace Membres
 
-https://symfony.com/doc/current/security.html
+>https://symfony.com/doc/current/security.html
 
 ####Phase 1 : création de l'entité User()
-``symfony console make:user``
+>``symfony console make:user``
 
-```php
+```txt
 
 The name of the security user class (e.g. User) [User]:
  > User
@@ -92,7 +93,8 @@ The name of the security user class (e.g. User) [User]:
  updated: src/Entity/User.php
  updated: config/packages/security.yaml
 ```
-  - creer la database avec doctrine : 
+
+- creer la database avec doctrine : 
 
 modifier ici :
 
@@ -148,7 +150,7 @@ twig:
 
 Ajout de champs dans la table user (entity)
 
-`symfony console make:entity`
+>`symfony console make:entity`
 
 il demande si vous souhaiter mettre a jour ou creer une nouvelle entity :
 
@@ -157,18 +159,19 @@ il demande si vous souhaiter mettre a jour ou creer une nouvelle entity :
 
 il demande le nom ~~du nouveau champs a ajouter~~ (la nouvelle proprieter) : 
 
-> `New property name (press <return> to stop adding fields):
-> firstname
+> ```text
+> New property name (press <return> to stop adding fields):
+> > firstname
 >  Field type (enter ? to see all types) [string]:
-> 
-> Field length [255]:
->
-`
+> > Field length [255]: 
+> ```
+
 il demande si le champ peut etre null : 
 
->` Can this field be null in the database (nullable) (yes/no) [no]:
-> no
-`
+```txt
+  Can this field be null in the database (nullable) (yes/no) [no]:
+ > no 
+```
 
 il demande si l'on veut en ajouter d'autre ou ou pas 
 
@@ -178,9 +181,11 @@ il demande si l'on veut en ajouter d'autre ou ou pas
 Ensuite faire la migration : 
 
 > `symfony console make:migration` 
+>
 > `symfony console doctrine:migrations:migrate`
 
 >###Docs: 
+> 
 >Contrainte de validation du formulaire
 > https://symfony.com/doc/current/reference/forms/types/form.html#constraints
 
@@ -214,6 +219,14 @@ est-ce-qu'on veut une route de déconnexion
 Do you want to generate a '/logout' URL? (yes/no) [yes]:
 >yes
 ```
+
+Création de l'espace membre :
+> `symfony console make:controller`
+
+>`` Choose a name for your controller class (e.g. FierceGnomeController):
+  > AccountController``
+>
+
 
 
 
