@@ -793,22 +793,19 @@
     </section><!-- End Contact Section -->
 
     <!-- ======= Footer  ======= -->
-    <footer>
-        {% if app.user %}
-            <a href="{{ path('app_account') }}">Mon compte <small>({{ app.user.firstname }})</small></a> | <a
-                href="{{ path('app_logout') }}">Déconnexion</a>
-        {% else %}
-            <a href="{{ path('app_login') }}">Connexion</a> | <a href="{{ path('app_register') }}">Inscription</a>
-        {% endif %}
-
-        <div class="credits">
+        <footer class="credits text-center">
+            {% if app.user %}
+                <a href="{# { path('app_account') }#}">Mon compte <small>({{ app.user.firstname }})</small></a> | <a
+                    href="{{ path('app_logout') }}">Déconnexion</a>
+            {% else %}
+                <a href="{{ path('app_login') }}">Connexion</a> | <a href="{{ path('app_register') }}">Inscription</a>
+            {% endif %}
+            <hr>
             <!-- All the links in the footer should remain intact. -->
             <!-- You can delete the links only if you purchased the pro version. -->
             <!-- Licensing information: https://bootstrapmade.com/license/ -->
             <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/personal-free-resume-bootstrap-template/ -->
             Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-        </div>
-
-    </footer><!-- End Footer -->
+        </footer><!-- End Footer -->
 
 {% endblock %}
