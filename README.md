@@ -110,6 +110,7 @@ pour migrer sa table :
 
 
 ####Phase 2 : création du formulaire d'inscription
+
   - creation du controlleur d'inscription :
 
 >  `symfony console make:controller`
@@ -185,7 +186,34 @@ Ensuite faire la migration :
 
 ####Phase 3 : création du formulaire de connexion
 
+on cree un guard authentification
+> `symfony console make:auth`
 
+quel style d'authetification vous vouler :
+0 un authenticator vide
+1 un formulaire de connexion
+```console 
+What style of authentication do you want? [Empty authenticator]:
+[0] Empty authenticator
+[1] Login form authenticator`
+>1
+```
+
+il va cree une class qui permettra de verifier toute les correspondance pour ce connecter
+
+```
+The class name of the authenticator to create (e.g. AppCustomAuthenticator):
+>LoginFormAuthenticator
+Choose a name for the controller class (e.g. SecurityController) [SecurityController]:
+ >
+
+```
+est-ce-qu'on veut une route de déconnexion
+
+```
+Do you want to generate a '/logout' URL? (yes/no) [yes]:
+>yes
+```
 
 
 
