@@ -527,7 +527,11 @@ s]:
 ```
 > https://www.youtube.com/watch?v=GNJ7fO_1eYg&list=PLl3CtU4THqPawV0hRF8Qqn0RVEHSjYgfy&index=37&ab_channel=TechWall
 
-
+crée la page d'accueil du dashboard :
+apres de longue heure de recherche qui ma value une nuit blanche j'ai trouver la reponse dans cette article 
+> https://symfonycasts.com/screencast/easyadminbundle/dashboard#play
+> https://symfony.com/bundles/EasyAdminBundle/4.x/design.html
+> `php bin/console assets:install --symlink`
 
 
 
@@ -574,3 +578,5 @@ Pour pouvoir recuperate le dossier en local
 ###RESSOURCES DES MODULE A IMPLEMENTER
 > [Full Calendar](https://nouvelle-techno.fr/articles/live-coding-utilisation-de-fullcalendar)
 > [authentification a deux facteur ](https://symfony.com/bundles/SchebTwoFactorBundle/current/index.html)
+> 
+> [chat en js et ajax](https://www.youtube.com/watch?v=OYQuyUn9Ik8&ab_channel=NouvelleTechno)
