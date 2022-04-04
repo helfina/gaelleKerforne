@@ -62,7 +62,7 @@ Exemple:
       #[Route('/', name: 'app_home')]
       public function index(): Response 
       { 
-            return $this->render('home/index.html.twig'); 
+            return $this->render('home/portfolio-details.html.twig'); 
       } 
   }
   ```
@@ -534,7 +534,10 @@ apres de longue heure de recherche qui ma value une nuit blanche j'ai trouver la
 > `php bin/console assets:install --symlink`
 
 
+faire un crud pour l'admin : 
 
+`` symfony console make:admin:crud
+``
 
 
 

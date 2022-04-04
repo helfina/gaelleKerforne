@@ -30,12 +30,16 @@ class Mois
     #[ORM\ManyToMany(targetEntity: Prelevement::class, mappedBy: 'id_mois')]
     private $prelevements;
 
+    #[ORM\ManyToMany(targetEntity: Quotidien::class, mappedBy: 'id_mois')]
+    private $quotidiens;
+
     public function __construct()
     {
         $this->cafs = new ArrayCollection();
         $this->revenues = new ArrayCollection();
         $this->pretMaisons = new ArrayCollection();
         $this->prelevements = new ArrayCollection();
+        $this->quotidiens = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -164,6 +168,33 @@ class Mois
     {
         if ($this->prelevements->removeElement($prelevement)) {
             $prelevement->removeIdMoi($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Quotidien>
+     */
+    public function getQuotidiens(): Collection
+    {
+        return $this->quotidiens;
+    }
+
+    public function addQuotidien(Quotidien $quotidien): self
+    {
+        if (!$this->quotidiens->contains($quotidien)) {
+            $this->quotidiens[] = $quotidien;
+            $quotidien->addIdMoi($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuotidien(Quotidien $quotidien): self
+    {
+        if ($this->quotidiens->removeElement($quotidien)) {
+            $quotidien->removeIdMoi($this);
         }
 
         return $this;

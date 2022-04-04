@@ -1,8 +1,14 @@
 {% extends '@EasyAdmin/page/content.html.twig' %}
 
-
 {% block content %}
-{% dump(app.user) %}
+    <main class="homeAdmin" style="background: #f0e9e9 url('{{ asset('assets/img/student-gdc61a8fa1_1920.jpg') }}') top right no-repeat;background-size: cover;">
+
+        <h1 class="text-center">Accueil Administrateur</h1>
+        <a class="text-decoration-none text-black" href="{{ path('app_home') }}">Retour a l'accueil du site</a>
+{#        <p>{{ app.user.roles[0] }}</p>#}
+         {{ dump(app) }}
+    </main>
+
 
 
 {% endblock %}

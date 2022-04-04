@@ -2,17 +2,15 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Mois;
-use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
+use App\Entity\Portfolio;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
-class MoisCrudController extends AbstractCrudController
+class PortfolioCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Mois::class;
+        return Portfolio::class;
     }
-
 
     /*
     public function configureFields(string $pageName): iterable
