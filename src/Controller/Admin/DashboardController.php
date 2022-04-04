@@ -8,29 +8,33 @@ use App\Entity\Prelevement;
 use App\Entity\PretMaison;
 use App\Entity\Revenues;
 use App\Entity\User;
+use App\Repository\MoisRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
-use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 class DashboardController extends AbstractDashboardController
 {
-    public function __construct(private AdminUrlGenerator $adminUrlGenerator)
+    public function __construct(MoisRepository $moisRepository)
     {
+        $this->moisRepository = $moisRepository;
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
-
+        return $this->render('admin/index.html.twig');
         // on genere un url pour afficher la liste des utilisateur (genere la route correspondante a laffiche de la liste user )
-        $url = $this->adminUrlGenerator
-            ->setController(UserCrudController::class)
-            ->generateUrl();
-        return $this->redirect($url);
+//        $url = $this->adminUrlGenerator
+//            ->setController(UserCrudController::class)
+//            ->generateUrl();
+//        return $this->redirect($url);
 
     }
 
