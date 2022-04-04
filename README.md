@@ -150,12 +150,12 @@ ajouter:
 twig:
   form_themes: ['bootstrap_5_layout.html.twig']
 ```
-##Création d'une entité
+##Création d'une entité ou Mise a jour
 Ajout de champs dans la table user (entity)
 
 >`symfony console make:entity`
 
-il demande si vous souhaiter mettre a jour ou creer une nouvelle entity :
+- il demande si vous souhaiter mettre a jour ou creer une nouvelle entity :
 
 > `Class name of the entity to create or update (e.g. DeliciousElephant):`
 > `User`
@@ -165,9 +165,16 @@ il demande le nom ~~du nouveau champs a ajouter~~ (la nouvelle proprieter) :
 > ```text
 > New property name (press <return> to stop adding fields):
 > > firstname
+
 >  Field type (enter ? to see all types) [string]:
-> > Field length [255]: 
-> ```
+
+*si on veut faire une relation entre deux table ecrire relation*
+
+> Field length [255]: 
+```
+
+
+
 
 il demande si le champ peut etre null : 
 
@@ -455,8 +462,70 @@ Which Doctrine entity are you going to manage with this CRUD controller?:
 
 > [modification du Dashboard EasyAdmin 4](https://www.youtube.com/watch?v=ze6XJTACo1s) 
 
+## Modification d'une table Relation entre deux table(entity) : 
+`symfony console make:entity`
 
+```text
+$ symfony console make:entity
 
+ Class name of the entity to create or update (e.g. OrangePizza):
+ > Caf                                                           
+Caf
+
+ Your entity already exists! So let's add some new fields!
+
+ New property name (press <return> to stop adding fields):
+ > id_mois
+
+ Field type (enter ? to see all types) [string]:
+ > relation
+relation
+
+ What class should this entity be related to?:
+  Type         Description                                                   
+ ------------ ---------------------------------------------------------------
+  ManyToOne    Each Caf relates to (has) one Mois.                            
+               Each Mois can relate to (can have) many Caf objects
+
+  OneToMany    Each Caf can relate to (can have) many Mois objects.           
+               Each Mois relates to (has) one Caf
+
+  ManyToMany   Each Caf can relate to (can have) many Mois objects.           
+               Each Mois can also relate to (can also have) many Caf objects
+
+  OneToOne     Each Caf relates to (has) exactly one Mois.                    
+               Each Mois also relates to (has) exactly one Caf.
+ ------------ ---------------------------------------------------------------
+
+ Relation type? [ManyToOne, OneToMany, ManyToMany, OneToOne]:
+ >ManyToMany
+ Do you want to add a new property to Mois so that you can access/update Caf objects from it - e.g. $mois->getCafs()? (yes/no) [ye
+s]:
+ > yes 
+
+ A new property will also be added to the Mois class so that you can access the related Caf objects from it.
+
+ New field name inside Mois [cafs]:
+ >
+
+ updated: src/Entity/Caf.php
+ updated: src/Entity/Mois.php
+
+```
+```text
+ ManyToOne Chaque Caf se rapporte à (a) un Mois.                            
+               Chaque Mois peut se rapporter à (peut avoir) plusieurs objets Caf.
+
+  OneToMany Chaque Caf peut se rapporter à (peut avoir) plusieurs objets Mois.           
+               Chaque Mois est lié à (a) un Caf.
+
+  ManyToMany Chaque Caf peut se rapporter à (peut avoir) de nombreux objets Mois.           
+               Chaque Mois peut également se rapporter à (peut également avoir) de nombreux objets Caf.
+
+  OneToOne Chaque Caf est en relation avec (a) exactement un Mois.                    
+               Chaque Mois est également lié à (a) exactement un Caf.
+```
+> https://www.youtube.com/watch?v=GNJ7fO_1eYg&list=PLl3CtU4THqPawV0hRF8Qqn0RVEHSjYgfy&index=37&ab_channel=TechWall
 
 
 
@@ -504,3 +573,4 @@ Pour pouvoir recuperate le dossier en local
 
 ###RESSOURCES DES MODULE A IMPLEMENTER
 > [Full Calendar](https://nouvelle-techno.fr/articles/live-coding-utilisation-de-fullcalendar)
+> [authentification a deux facteur ](https://symfony.com/bundles/SchebTwoFactorBundle/current/index.html)
