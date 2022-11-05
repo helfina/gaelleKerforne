@@ -4,6 +4,9 @@ namespace App\Controller\Admin;
 
 use App\Entity\Caf;
 use App\Entity\Categories;
+use App\Entity\CategoriesCompta;
+use App\Entity\Credit;
+use App\Entity\Debit;
 use App\Entity\Images;
 use App\Entity\Mois;
 use App\Entity\Portfolio;
@@ -20,6 +23,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -30,7 +34,8 @@ class DashboardController extends AbstractDashboardController
 
     public function __construct(MoisRepository $moisRepository, CafRepository $cafRepository)
     {
-        $mois = $moisRepository->findAll();
+         $idMoisActuelle = date('n');
+        $mois = $moisRepository->find($idMoisActuelle);
         $caf = $cafRepository->findAll();
     }
 
@@ -39,7 +44,7 @@ class DashboardController extends AbstractDashboardController
     public function index(): Response
     {
         $mois = $this->mois;
-
+dd($mois);
 
 
         return $this->render('admin/index.html.twig',[
@@ -90,6 +95,21 @@ class DashboardController extends AbstractDashboardController
 
 
         yield MenuItem::section('Compta');
+
+        yield MenuItem::subMenu('Categories compta', 'fas fa-user-pilot')->setSubItems([
+            MenuItem::linkToCrud('Add Categories', 'fas fa-user-plus', CategoriesCompta::class)->setAction(Crud::PAGE_NEW),
+            MenuItem::linkToCrud('Show Categories', 'fas fa-users', CategoriesCompta::class),
+        ]);
+        yield MenuItem::subMenu('Credit', 'fas fa-user-pilot')->setSubItems([
+            MenuItem::linkToCrud('Add Credit', 'fas fa-user-plus', Credit::class)->setAction(Crud::PAGE_NEW),
+            MenuItem::linkToCrud('Show Credit', 'fas fa-users', Credit::class),
+        ]);
+
+        yield MenuItem::subMenu('Debit', 'fas fa-user-pilot')->setSubItems([
+            MenuItem::linkToCrud('Add Debit', 'fas fa-user-plus', Debit::class)->setAction(Crud::PAGE_NEW),
+            MenuItem::linkToCrud('Show Debit', 'fas fa-users', Debit::class),
+        ]);
+
         yield MenuItem::subMenu('Mois', 'fas fa-user-pilot')->setSubItems([
             MenuItem::linkToCrud('Add Mois', 'fas fa-user-plus', Mois::class)->setAction(Crud::PAGE_NEW),
             MenuItem::linkToCrud('Show Mois', 'fas fa-users', Mois::class)
