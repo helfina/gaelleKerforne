@@ -35,6 +35,7 @@ class RegisterController extends AbstractController
             // enregistrement en bdd
             $manager->persist($user); // je prepare et je fige la donner pour la creation de l'entity
             $manager->flush();
+            return  $this->redirectToRoute('app_login');
         }
         return $this->render('register/index.html.twig', [
             'form' => $form->createView()
